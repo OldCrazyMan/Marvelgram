@@ -4,8 +4,7 @@
 //
 //  Created by Тимур Ахметов on 07.02.2022.
 //
-//Получили данные и пытаеся их декодировать -> Создаем модель
-//Fetch - извлечь-приведение
+
 import Foundation
 
 class NetworkDataFetch {
@@ -16,10 +15,9 @@ class NetworkDataFetch {
     func fetchHero(responce: @escaping ([HeroMarvelModel]?, Error?) -> Void) {
         NetworkRequest.shared.requestData() { result in
             switch result {
-                //если Успех, то создаем свойство Дата и с помощью DO декодируем
             case .success(let data):
                 do {
-                    let hero = try JSONDecoder().decode([HeroMarvelModel].self, from: data) //формат в который хотим декодировать  
+                    let hero = try JSONDecoder().decode([HeroMarvelModel].self, from: data)
                     responce(hero, nil)
                 } catch let jsonError {
                     print("Failed to decode JSON", jsonError)
@@ -31,6 +29,3 @@ class NetworkDataFetch {
         }
     }
 }
-
-//понали создавать функцию getHeroarray
-

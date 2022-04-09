@@ -26,8 +26,8 @@ class MainViewController: UIViewController {
     private let idCollectionView = "idCollectionView"
     private var heroesArray = [HeroMarvelModel]()
     
-    private var isFiltred = false //при нажатии на серчКонтроллер - становится true
-    private var filtredArray = [IndexPath]() //добавляем индекспафы-номера ячеек
+    private var isFiltred = false
+    private var filtredArray = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +48,12 @@ class MainViewController: UIViewController {
         collectionView.register(HeroesCollectionViewCell.self, forCellWithReuseIdentifier: idCollectionView)
     }
     
-    private func setupNavigationBar() { //настройки Серча
+    private func setupNavigationBar() {
         searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController //добавили серч в навигейшнбар
+        navigationItem.searchController = searchController
         navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
         navigationItem.backButtonTitle = ""
-        navigationItem.titleView = createCustomTitleView() //происвоили тайтлвью метод
+        navigationItem.titleView = createCustomTitleView()
         navigationItem.hidesSearchBarWhenScrolling = false
         
         if #available(iOS 13.0, *) {
@@ -66,15 +66,14 @@ class MainViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        //два делегата за появление-прекращение работы и действие при вводе в строку
         searchController.searchResultsUpdater = self
         searchController.delegate = self
     }
     
     private func getHeroesArray() {
-        // извлекаем опционал и присваиваем массиву данные
-        NetworkDataFetch.shared.fetchHero { [weak self] heroMarvelArray, error in //ослабили ссылку   
-            guard let self = self else { return } //проверяем есть ссылка или нет
+  
+        NetworkDataFetch.shared.fetchHero { [weak self] heroMarvelArray, error in
+            guard let self = self else { return }
             if error != nil {
                 print("show alert")
             } else {
@@ -85,24 +84,23 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func setAlphaForCell(alpha: Double) { //инвиз для каждого вызванного в коллекции, которые мы видим
-        collectionView.visibleCells.forEach { cell in //перебираем  с помощью форИч
+    private func setAlphaForCell(alpha: Double) {
+        collectionView.visibleCells.forEach { cell in
             cell.alpha = alpha
         }
     }
     
-    private func createCustomTitleView() -> UIView { //создали вью и поместили на него тайтлбар марвел
+    private func createCustomTitleView() -> UIView {
         let view = UIView()
-        let heightNavBar = navigationController?.navigationBar.frame.height ?? 0 // ?? - если нет навигейшнбара, то значние по-умолчанию 0
-        let widthNavBar = navigationController?.navigationBar.frame.width ?? 0 //ширина навигейшнбара
-        view.frame = CGRect(x: 0, y: 0, width: widthNavBar, height: heightNavBar - 10) //размеры фрейма
+        let heightNavBar = navigationController?.navigationBar.frame.height ?? 0
+        let widthNavBar = navigationController?.navigationBar.frame.width ?? 0
+        view.frame = CGRect(x: 0, y: 0, width: widthNavBar, height: heightNavBar - 10)
         
-        //Установка лого Марвел во вью
         let marvelImageView = UIImageView()
         marvelImageView.image = UIImage(named: "marvelLogo")
         marvelImageView.contentMode = .left
         marvelImageView.frame = CGRect(x: 10, y: 0, width: widthNavBar , height: heightNavBar / 2)
-        view.addSubview(marvelImageView) //накинули имейджвью на тайтл
+        view.addSubview(marvelImageView)
         return view
     }
 }
@@ -110,15 +108,13 @@ class MainViewController: UIViewController {
 //MARK: - UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDataSource {
-    //numberOfItemsInSection - возвращает кол-во ячеек равное кол-ву элемента массива
+  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         heroesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //создаем переиспользованную ячейку, indexPath - определяет ее номер 0-49 и создаем кастомную ячейку в HerColVievCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idCollectionView, for: indexPath) as! HeroesCollectionViewCell
-        //получение конкретной модели из массива 0,0 0,1
         let heroModel = heroesArray[indexPath.row]
         cell.cellConfigure(model: heroModel)
         return cell
@@ -129,24 +125,22 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { //дидселект - нажатие на ячейку
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let heroModel = heroesArray[indexPath.row]
-        
-        //создаем переход/делаем экземпляр класса+в нем 2свойства в detailHero...VC
         let detailsHeroViewController = DetailsHeroViewController()
         detailsHeroViewController.heroModel = heroModel
         detailsHeroViewController.heroesArray = heroesArray
-        navigationController?.pushViewController(detailsHeroViewController, animated: true) //кнопка "назад"
+        navigationController?.pushViewController(detailsHeroViewController, animated: true)
     }
-    //виллДисплей-отрабатывает, как ячейка будет отображена
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if isFiltred { //если мы находимся в режиме фильтрации, то:
+        if isFiltred {
             cell.alpha = (filtredArray.contains(indexPath) ? 1 : 0.3)
         }
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout - отрисовка коллекции вью с картинками
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -159,17 +153,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UISearchResultsUpdating
 
 extension MainViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) { //обновляем поисковую строку и передаем вниз
+    func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
         filterContentForSearchText(text)
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        for (value, hero) in heroesArray.enumerated() { //достучались-перебрали героев и присвоили значение-индекс
+        for (value, hero) in heroesArray.enumerated() {
             let indexPath: IndexPath = [0, value]
             let cell = collectionView.cellForItem(at: indexPath)
-            if hero.name.lowercased().contains(searchText.lowercased()) {   //проверка героя в итерации
-                filtredArray.append(indexPath) //пишем букву - определились герои из индекспафа - сохранились в массив
+            if hero.name.lowercased().contains(searchText.lowercased()) {
+                filtredArray.append(indexPath)
                 cell?.alpha = 1
             } else {
                 cell?.alpha = 0.3
@@ -182,14 +176,14 @@ extension MainViewController: UISearchResultsUpdating {
 //MARK: - UISearchControllerDelegate
 
 extension MainViewController: UISearchControllerDelegate {
-    func didPresentSearchController(_ searchController: UISearchController) { //активация щелчком на контроллер
-        isFiltred = true //жмякнули по серчу
-        setAlphaForCell(alpha: 0.3) //прозрачность 30 процентов
+    func didPresentSearchController(_ searchController: UISearchController) {
+        isFiltred = true
+        setAlphaForCell(alpha: 0.3)
     }
     
-    func didDismissSearchController(_ searchController: UISearchController) { //прекращение с ним работать
+    func didDismissSearchController(_ searchController: UISearchController) {
         isFiltred = false
-        setAlphaForCell(alpha: 1) // прозрачность 100 процентов
+        setAlphaForCell(alpha: 1) 
         self.collectionView.reloadData()
     }
 }

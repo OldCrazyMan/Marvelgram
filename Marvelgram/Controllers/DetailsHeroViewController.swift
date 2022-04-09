@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsHeroViewController: UIViewController {
-   
+    
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.bounces = false
@@ -33,7 +33,7 @@ class DetailsHeroViewController: UIViewController {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "gggggg"
+        label.text = "Some text"
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,10 +50,10 @@ class DetailsHeroViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
- 
+    
     private let idRandomHeroCollectionView = "idRandomHeroCollectionView"
-    var heroModel: HeroMarvelModel? //некий один герой
-    var heroesArray = [HeroMarvelModel]() //передача массива со всеми героями
+    var heroModel: HeroMarvelModel?
+    var heroesArray = [HeroMarvelModel]()
     var randomHeroesArray = [HeroMarvelModel]()
     
     override func viewDidLoad() {
@@ -68,11 +68,10 @@ class DetailsHeroViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = #colorLiteral(red: 0.1516073942, green: 0.1516073942, blue: 0.1516073942, alpha: 1)
+    
         view.addSubview(scrollView)
         
         navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.topItem?.title = "BACK"
-
         if #available(iOS 13.0, *) {
             navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         }
@@ -94,8 +93,8 @@ class DetailsHeroViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    private func setupHeroInfo() { //метод для раскидывания по вьюшкам и тд
-        guard let heroModel = heroModel else { return } // проверяем-извлекаем опционал и приходит модельгероя
+    private func setupHeroInfo() {
+        guard let heroModel = heroModel else { return }
         title = heroModel.name
         descriptionLabel.text = heroModel.description
         if descriptionLabel.text == "" {
@@ -116,24 +115,15 @@ class DetailsHeroViewController: UIViewController {
     }
     
     private func getRandomHeroes() {
-//        var newArray = [Int]()
-//        var randomHeroesArray = [HeroMarvelModel]()
-//
-//        while newArray.count < 11 {
-//            let random = Int.random(in: 1...heroesArray.count - 1)
-//            if !newArray.contains(random) {
-//                newArray.append(random)
-//                randomHeroesArray.append(heroesArray[newArray])
-//        }
-//        }
+        
         for _ in 0...9 {
             let endPoint = heroesArray.count - 1
             let randomInt = Int.random(in: 0...endPoint)
-
-                    randomHeroesArray.append(heroesArray[randomInt])
- //       return newArray
+            
+            randomHeroesArray.append(heroesArray[randomInt])
+            
+        }
     }
-}
 }
 //MARK: - UICollectionViewDataSource
 
@@ -142,7 +132,7 @@ extension DetailsHeroViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         randomHeroesArray.count
     }
-    //выдераем 1 героя для ячейки в рандоме
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idRandomHeroCollectionView, for: indexPath) as! RandomHeroCollectionViewCell
         let heroModel = randomHeroesArray[indexPath.row]
@@ -156,9 +146,9 @@ extension DetailsHeroViewController: UICollectionViewDataSource {
 extension DetailsHeroViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //выдераем модель из 10 рандомов
+        
         let heroModel = randomHeroesArray[indexPath.row]
-        //передаем сами на себя, создаем новый экземпляр самого себя...
+        
         let detailsHeroViewController = DetailsHeroViewController()
         detailsHeroViewController.heroModel = heroModel
         detailsHeroViewController.heroesArray = heroesArray
@@ -166,11 +156,11 @@ extension DetailsHeroViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout  ячейки рандомных героев
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension DetailsHeroViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.height, //высота и ширина коллекшн вью
+        CGSize(width: collectionView.frame.height,
                height: collectionView.frame.height)
     }
 }
@@ -192,7 +182,6 @@ extension DetailsHeroViewController {
             heroImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
             heroImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             heroImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            //размер привязан к вью
             heroImageView.heightAnchor.constraint(equalToConstant: view.frame.width)
         ])
         
@@ -200,7 +189,6 @@ extension DetailsHeroViewController {
             descriptionLabel.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            //descriptionLabel.bottomAnchor.constraint(equalTo: exploreMoreLabel.topAnchor, constant: -10)
         ])
         
         NSLayoutConstraint.activate([
@@ -209,13 +197,11 @@ extension DetailsHeroViewController {
             exploreMoreLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             exploreMoreLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
-       
+        
         NSLayoutConstraint.activate([
-
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            //чем меньше экран - меньше картинки
-            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
             collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10)
         ])
     }

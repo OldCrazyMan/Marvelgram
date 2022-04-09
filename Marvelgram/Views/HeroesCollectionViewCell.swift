@@ -33,20 +33,20 @@ class HeroesCollectionViewCell: UICollectionViewCell {
     }
     
     func cellConfigure(model: HeroMarvelModel) {
-        //пытаемся получить юрл и вызываем нетворкИмейджФетч и делаем запрос на картинку
+        
         guard let url = model.thumbnail.url else { return }
         NetworkImageFetch.shared.requestImage(url: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                let image = UIImage(data: data)   //пытаемся получить изображение из data
-                self.heroImageView.image = image  //присваиваем изображение имеджВью
-            case .failure(_): //ошибка приложения, а не зависание
+                let image = UIImage(data: data)
+                self.heroImageView.image = image
+            case .failure(_):
                 print("AlertHere")
             }
         }
     }
-
+    
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
