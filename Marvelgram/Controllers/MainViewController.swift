@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  Marvelgram
 //
-//  Created by Тимур Ахметов on 07.02.2022.
+//  Created by Tim Akhm on 07.02.2022.
 //
 
 import UIKit
@@ -32,22 +32,19 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getHeroesArray()
         setupViews()
         setDelegates()
         setConstraints()
-        getHeroesArray()
     }
     
     private func setupViews() {
-        
         view.backgroundColor = #colorLiteral(red: 0.1516073942, green: 0.1516073942, blue: 0.1516073942, alpha: 1)
-        
         setupNavigationBar()
-        
         view.addSubview(collectionView)
         collectionView.register(HeroesCollectionViewCell.self, forCellWithReuseIdentifier: idCollectionView)
     }
-    
+     
     private func setupNavigationBar() {
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
@@ -71,7 +68,7 @@ class MainViewController: UIViewController {
     }
     
     private func getHeroesArray() {
-  
+        
         NetworkDataFetch.shared.fetchHero { [weak self] heroMarvelArray, error in
             guard let self = self else { return }
             if error != nil {
@@ -108,7 +105,7 @@ class MainViewController: UIViewController {
 //MARK: - UICollectionViewDataSource
 
 extension MainViewController: UICollectionViewDataSource {
-  
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         heroesArray.count
     }
@@ -132,7 +129,7 @@ extension MainViewController: UICollectionViewDelegate {
         detailsHeroViewController.heroesArray = heroesArray
         navigationController?.pushViewController(detailsHeroViewController, animated: true)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isFiltred {
             cell.alpha = (filtredArray.contains(indexPath) ? 1 : 0.3)
@@ -169,7 +166,6 @@ extension MainViewController: UISearchResultsUpdating {
                 cell?.alpha = 0.3
             }
         }
-
     }
 }
 
@@ -193,7 +189,7 @@ extension MainViewController: UISearchControllerDelegate {
 extension MainViewController {
     
     private func setConstraints() {
-    
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),

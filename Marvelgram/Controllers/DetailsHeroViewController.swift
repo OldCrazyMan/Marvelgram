@@ -2,7 +2,7 @@
 //  DetailsHeroViewController.swift
 //  Marvelgram
 //
-//  Created by Тимур Ахметов on 07.02.2022.
+//  Created by Tim Akhm on 07.02.2022.
 //
 
 import UIKit
@@ -54,7 +54,7 @@ class DetailsHeroViewController: UIViewController {
     private let idRandomHeroCollectionView = "idRandomHeroCollectionView"
     var heroModel: HeroMarvelModel?
     var heroesArray = [HeroMarvelModel]()
-    var randomHeroesArray = [HeroMarvelModel]()
+    var randomHeroesArray: [HeroMarvelModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,6 @@ class DetailsHeroViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = #colorLiteral(red: 0.1516073942, green: 0.1516073942, blue: 0.1516073942, alpha: 1)
-    
         view.addSubview(scrollView)
         
         navigationController?.navigationBar.tintColor = .white
@@ -116,15 +115,27 @@ class DetailsHeroViewController: UIViewController {
     
     private func getRandomHeroes() {
         
-        for _ in 0...9 {
-            let endPoint = heroesArray.count - 1
-            let randomInt = Int.random(in: 0...endPoint)
-            
+        while randomHeroesArray.count < 8 {
+            let randomInt = Int.random(in: 0...heroesArray.count - 1)
             randomHeroesArray.append(heroesArray[randomInt])
-            
+            let sortAr = unique(source: randomHeroesArray)
+            randomHeroesArray = sortAr
         }
     }
+    
+    func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
+        var buffer = [T]()
+        var added = Set<T>()
+        for elem in source {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
+    }
 }
+
 //MARK: - UICollectionViewDataSource
 
 extension DetailsHeroViewController: UICollectionViewDataSource {

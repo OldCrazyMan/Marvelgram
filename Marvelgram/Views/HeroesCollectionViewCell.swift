@@ -2,7 +2,7 @@
 //  HeroesCollectionViewCell.swift
 //  Marvelgram
 //
-//  Created by Тимур Ахметов on 07.02.2022.
+//  Created by Tim Akhm on 07.02.2022.
 //
 
 import UIKit
@@ -21,6 +21,10 @@ class HeroesCollectionViewCell: UICollectionViewCell {
         
         setupViews()
         setConstraints()
+    }
+    
+    override func prepareForReuse() {
+        heroImageView.image = nil
     }
     
     required init?(coder: NSCoder) {
