@@ -107,14 +107,13 @@ class DetailsHeroViewController: UIViewController {
             case .success(let data):
                 let image = UIImage(data: data)
                 self.heroImageView.image = image
-            case .failure(_):
-                print("AlertHere")
+            case .failure(let error):
+                print("DetailsVC error:\(error.localizedDescription)")
             }
         }
     }
     
     private func getRandomHeroes() {
-        
         while randomHeroesArray.count < 8 {
             let randomInt = Int.random(in: 0...heroesArray.count - 1)
             randomHeroesArray.append(heroesArray[randomInt])
@@ -145,7 +144,8 @@ extension DetailsHeroViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idRandomHeroCollectionView, for: indexPath) as! RandomHeroCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idRandomHeroCollectionView,
+                                                            for: indexPath) as? RandomHeroCollectionViewCell else { return UICollectionViewCell() }
         let heroModel = randomHeroesArray[indexPath.row]
         cell.cellConfigure(model: heroModel)
         return cell

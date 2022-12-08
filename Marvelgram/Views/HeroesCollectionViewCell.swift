@@ -45,8 +45,8 @@ class HeroesCollectionViewCell: UICollectionViewCell {
             case .success(let data):
                 let image = UIImage(data: data)
                 self.heroImageView.image = image
-            case .failure(_):
-                print("AlertHere")
+            case .failure(let error):
+                print("CellConfig error:\(error.localizedDescription)")
             }
         }
     }
