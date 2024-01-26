@@ -1,5 +1,5 @@
 //
-//  ModelBuilder.swift
+//  DetailsViewModel.swift
 //  Marvelgram
 //
 //  Created by Tim Akhmetov on 26.01.2024.

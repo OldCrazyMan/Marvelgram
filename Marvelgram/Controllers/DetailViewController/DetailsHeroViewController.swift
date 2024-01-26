@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailsHeroViewController: UIViewController {
+final class DetailsHeroViewController: UIViewController {
     
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -51,7 +51,7 @@ class DetailsHeroViewController: UIViewController {
         return collectionView
     }()
     
-    private let idRandomHeroCollectionView = "idRandomHeroCollectionView"
+  //  private let idRandomHeroCollectionView = "idRandomHeroCollectionView"
     var heroModel: HeroMarvelModel?
     var heroesArray = [HeroMarvelModel]()
     var randomHeroesArray: [HeroMarvelModel] = []
@@ -75,7 +75,7 @@ class DetailsHeroViewController: UIViewController {
             navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         }
         
-        collectionView.register(RandomHeroCollectionViewCell.self, forCellWithReuseIdentifier: idRandomHeroCollectionView)
+        collectionView.register(HeroesCollectionViewCell.self, forCellWithReuseIdentifier: HeroesCollectionViewCell.idCollectionView)
         
         scrollView.addSubview(heroImageView)
         scrollView.addSubview(descriptionLabel)
@@ -144,10 +144,10 @@ extension DetailsHeroViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idRandomHeroCollectionView,
-                                                            for: indexPath) as? RandomHeroCollectionViewCell else { return UICollectionViewCell() }
-        let heroModel = randomHeroesArray[indexPath.row]
-        cell.cellConfigure(model: heroModel)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeroesCollectionViewCell.idCollectionView,
+                                                            for: indexPath) as? HeroesCollectionViewCell else { return UICollectionViewCell() }
+  //      let heroModel = randomHeroesArray[indexPath.row]
+   //     cell.cellConfigure(model: heroModel)
         return cell
     }
 }
