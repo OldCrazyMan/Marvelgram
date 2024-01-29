@@ -10,7 +10,6 @@ import UIKit
 extension MainViewController {
     
     func setupNavigationBar() {
-        
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.searchBar.placeholder = "Search"
@@ -69,12 +68,10 @@ extension MainViewController: UISearchResultsUpdating {
 extension MainViewController: UISearchControllerDelegate {
     func didPresentSearchController(_ searchController: UISearchController) {
         isFiltred = true
-      //  setAlphaForCell(alpha: 0.3)
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
         isFiltred = false
-     //   setAlphaForCell(alpha: 1)
         self.mainCollectionView.reloadData()
     }
 }

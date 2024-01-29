@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkDataFetch {
+public class NetworkDataFetch {
     
     static let shared = NetworkDataFetch()
     private init() {}

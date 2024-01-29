@@ -15,10 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
    
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-        window?.makeKeyAndVisible()
-        window?.overrideUserInterfaceStyle = .dark
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let mainVC = ModelBuilder.createMainModule()
+        
+        let mainNavigationController = UINavigationController(rootViewController: mainVC)
+        window.rootViewController = mainNavigationController
+        window.makeKeyAndVisible()
+        
+        self.window = window
         return true
     }
 }

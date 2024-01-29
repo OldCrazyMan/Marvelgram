@@ -1,6 +1,6 @@
 //
 //  Observable.swift
-//  MovieDetailsMVVM
+//  HeroDetailsMVVM
 //
 //  Created by Sajjad Sarkoobi on 26.06.2022.
 //

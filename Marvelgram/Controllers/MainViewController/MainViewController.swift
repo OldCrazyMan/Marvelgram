@@ -8,6 +8,13 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    
+    var isFiltred = false
+    var filtredArray = [IndexPath]()
+    var viewModel: ViewModelProtocol
+    var heroesDataSource: [HeroCollectionCellViewModel] = []
+    let searchController = UISearchController()
+    
     let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 1
@@ -16,51 +23,47 @@ final class MainViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
-    let searchController = UISearchController()
-    var isFiltred = false
-    var filtredArray = [IndexPath]()
-    var viewModel: MainViewModel = MainViewModel()
-    var heroesDataSource: [HeroCollectionCellViewModel] = []
-    
     private let activityIndicator: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView()
-        spinner.hidesWhenStopped = true
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        return spinner
+        let activityView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView.hidesWhenStopped = true
+        return activityView
     }()
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.getData()
+    init(viewModel: ViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
         bindViewModel()
+        setupViews()
     }
     
     private func setupViews() {
+        viewModel.getData()
+        setupNavigationBar()
+        setCollectionView()
+        
         view.backgroundColor = #colorLiteral(red: 0.1516073942, green: 0.1516073942, blue: 0.1516073942, alpha: 1)
         view.addSubview(mainCollectionView)
         view.addSubview(activityIndicator)
         
-        setupNavigationBar()
-        setCollectionView()
+        activityIndicator.center = view.center
     }
     
     private func bindViewModel() {
-        
         viewModel.isLoadingData.bind { [weak self] isLoading in
-            guard let isLoading = isLoading else {
-                return
-            }
+            guard let isLoading = isLoading else { return }
+            
             DispatchQueue.main.async {
                 if isLoading {
                     self?.activityIndicator.startAnimating()
@@ -72,12 +75,22 @@ final class MainViewController: UIViewController {
         
         viewModel.heroes.bind { [weak self] heroes in
             guard let self = self,
-                  let heroes = heroes else {
-                return
-            }
+                  let heroes = heroes else { return }
+            
             self.heroesDataSource = heroes
-            print(heroes)
             self.reloadCollectionView()
+        }
+    }
+    
+    func openDetails(id: Int) {
+        guard let hero = viewModel.retriveHero(withId: id) else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let detailsViewModel = DetailsHeroViewModel(hero: hero, randomArray: self.heroesDataSource)
+            let controller = DetailsHeroViewController(viewModel: detailsViewModel)
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-   
+    
     func setCollectionView() {
         self.mainCollectionView.frame = view.bounds
         self.mainCollectionView.dataSource = self
@@ -26,12 +26,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
     
-    private func setAlphaForCell(alpha: Double) {
-        mainCollectionView.visibleCells.forEach { cell in
-            cell.alpha = alpha
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.numberOfItems(in: section)
     }
@@ -43,13 +37,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.cellConfigure(model: heroModel)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //    let heroModel =  presenter.heroesCellViewModels[indexPath.row]
-    //    let detailsHeroViewController = DetailsHeroViewController()
-   //     detailsHeroViewController.heroModel = heroModel
-   //     detailsHeroViewController.heroesArray = presenter.heroesCellViewModels
-     //   navigationController?.pushViewController(detailsHeroViewController, animated: true)
+        let heroId = heroesDataSource[indexPath.row].id
+        self.openDetails(id: heroId)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -6,7 +6,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 class NetworkRequest {
     
@@ -14,19 +14,45 @@ class NetworkRequest {
     private init() {}
     func requestData(completion: @escaping (Result<Data, Error>) -> Void) {
         
-        let urlString = "https://static.upstarts.work/tests/marvelgram/klsZdDg50j2.json"
+        let urlString = NetworkConstants.shared.serverAddress
         guard let url = URL(string: urlString) else { return }
         
-        URLSession.shared.dataTask(with: url) { (data, responce, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                guard let data = data else { return }
-                completion(.success(data))
+        let dispatchGroup = DispatchGroup()
+        let queue = DispatchQueue(label: "queues.serial")
+        
+        dispatchGroup.enter()
+        
+        asyncLoadImage(imageURL: URL(string: urlString)!,
+                       runQueue: queue,
+                       completionQueue: DispatchQueue.main) { data, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else { return }
+            completion(.success(data))
+            dispatchGroup.leave()
+        }
+    }
+}
+
+private extension NetworkRequest {
+    func asyncLoadImage(
+        imageURL: URL,
+        runQueue: DispatchQueue,
+        completionQueue: DispatchQueue,
+        completion: @escaping (Data?, Error?) -> ()) {
+        runQueue.async {
+            do {
+                let data = try Data(contentsOf: imageURL)
+                //sleep останавливает очередь на заданное время
+                //arc4random дает нам рандомное время
+                sleep(arc4random() % 4)
+                completionQueue.async { completion(data, nil) }
+            } catch let error {
+                completionQueue.async { completion(nil, error) }
             }
         }
-        .resume()
     }
 }

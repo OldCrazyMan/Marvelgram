@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CDFD7612B63CE2700EED14C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7602B63CE2700EED14C /* MainViewModel.swift */; };
+		4CDFD7632B63DFF100EED14C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7622B63DFF100EED14C /* Observable.swift */; };
+		4CDFD7652B63E05500EED14C /* MovieTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7642B63E05500EED14C /* MovieTableCellViewModel.swift */; };
+		4CDFD7672B63E93F00EED14C /* MainViewController + CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7662B63E93F00EED14C /* MainViewController + CollectionView.swift */; };
+		4CDFD7692B63EDAE00EED14C /* MainViewController + SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7682B63EDAE00EED14C /* MainViewController + SearchController.swift */; };
+		4CDFD76E2B63F16B00EED14C /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD76D2B63F16B00EED14C /* DetailsViewModel.swift */; };
+		4CDFD7702B643E7300EED14C /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD76F2B643E7300EED14C /* NetworkConstants.swift */; };
+		4CDFD7722B64438D00EED14C /* DetailsHeroViewController + CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7712B64438D00EED14C /* DetailsHeroViewController + CollectionView.swift */; };
+		4CDFD7742B6446CF00EED14C /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDFD7732B6446CF00EED14C /* Builder.swift */; };
 		4CEFF2B627B420BC00FC0B28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF2B527B420BC00FC0B28 /* AppDelegate.swift */; };
 		4CEFF2BF27B420BE00FC0B28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CEFF2BE27B420BE00FC0B28 /* Assets.xcassets */; };
 		4CEFF2C227B420BE00FC0B28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CEFF2C027B420BE00FC0B28 /* LaunchScreen.storyboard */; };
@@ -17,10 +26,18 @@
 		4CEFF2DD27B4259B00FC0B28 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF2DC27B4259B00FC0B28 /* NetworkDataFetch.swift */; };
 		4CEFF2E027B425D400FC0B28 /* NetworkImageFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF2DF27B425D400FC0B28 /* NetworkImageFetch.swift */; };
 		4CEFF2E227B4295100FC0B28 /* DetailsHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF2E127B4295100FC0B28 /* DetailsHeroViewController.swift */; };
-		4CEFF2E427B42AC200FC0B28 /* RandomHeroCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEFF2E327B42AC200FC0B28 /* RandomHeroCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4CDFD7602B63CE2700EED14C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4CDFD7622B63DFF100EED14C /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		4CDFD7642B63E05500EED14C /* MovieTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableCellViewModel.swift; sourceTree = "<group>"; };
+		4CDFD7662B63E93F00EED14C /* MainViewController + CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController + CollectionView.swift"; sourceTree = "<group>"; };
+		4CDFD7682B63EDAE00EED14C /* MainViewController + SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController + SearchController.swift"; sourceTree = "<group>"; };
+		4CDFD76D2B63F16B00EED14C /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		4CDFD76F2B643E7300EED14C /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		4CDFD7712B64438D00EED14C /* DetailsHeroViewController + CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailsHeroViewController + CollectionView.swift"; sourceTree = "<group>"; };
+		4CDFD7732B6446CF00EED14C /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		4CEFF2B227B420BC00FC0B28 /* Marvelgram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvelgram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CEFF2B527B420BC00FC0B28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CEFF2BE27B420BE00FC0B28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,7 +50,6 @@
 		4CEFF2DC27B4259B00FC0B28 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
 		4CEFF2DF27B425D400FC0B28 /* NetworkImageFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageFetch.swift; sourceTree = "<group>"; };
 		4CEFF2E127B4295100FC0B28 /* DetailsHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsHeroViewController.swift; sourceTree = "<group>"; };
-		4CEFF2E327B42AC200FC0B28 /* RandomHeroCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomHeroCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +63,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CDFD76A2B63EEFA00EED14C /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4CEFF2D627B4250300FC0B28 /* MainViewController.swift */,
+				4CDFD7662B63E93F00EED14C /* MainViewController + CollectionView.swift */,
+				4CDFD7682B63EDAE00EED14C /* MainViewController + SearchController.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		4CDFD76B2B63EF0C00EED14C /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4CEFF2E127B4295100FC0B28 /* DetailsHeroViewController.swift */,
+				4CDFD7712B64438D00EED14C /* DetailsHeroViewController + CollectionView.swift */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		4CDFD76C2B63EF2E00EED14C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4CDFD7602B63CE2700EED14C /* MainViewModel.swift */,
+				4CDFD76D2B63F16B00EED14C /* DetailsViewModel.swift */,
+			);
+			name = ViewModel;
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4CEFF2A927B420BC00FC0B28 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +115,7 @@
 				4CEFF2CB27B4210700FC0B28 /* Models */,
 				4CEFF2CC27B4210B00FC0B28 /* Views */,
 				4CEFF2CD27B4219100FC0B28 /* Controllers */,
+				4CDFD76C2B63EF2E00EED14C /* ViewModel */,
 				4CEFF2CE27B421AA00FC0B28 /* Network */,
 				4CEFF2CF27B421B800FC0B28 /* Resources */,
 			);
@@ -80,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				4CEFF2B527B420BC00FC0B28 /* AppDelegate.swift */,
+				4CDFD7622B63DFF100EED14C /* Observable.swift */,
+				4CDFD7732B6446CF00EED14C /* Builder.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -88,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				4CEFF2D027B4238F00FC0B28 /* HeroMarvelModel.swift */,
+				4CDFD7642B63E05500EED14C /* MovieTableCellViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,8 +144,7 @@
 		4CEFF2CC27B4210B00FC0B28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4CEFF2D227B423C100FC0B28 /* MainVC */,
-				4CEFF2D527B4248E00FC0B28 /* DetailsVC */,
+				4CEFF2D327B423E500FC0B28 /* HeroesCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -104,8 +152,8 @@
 		4CEFF2CD27B4219100FC0B28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4CEFF2D627B4250300FC0B28 /* MainViewController.swift */,
-				4CEFF2E127B4295100FC0B28 /* DetailsHeroViewController.swift */,
+				4CDFD76A2B63EEFA00EED14C /* MainViewController */,
+				4CDFD76B2B63EF0C00EED14C /* DetailViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -113,6 +161,7 @@
 		4CEFF2CE27B421AA00FC0B28 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4CDFD76F2B643E7300EED14C /* NetworkConstants.swift */,
 				4CEFF2DA27B4257400FC0B28 /* NetworkRequest.swift */,
 				4CEFF2DC27B4259B00FC0B28 /* NetworkDataFetch.swift */,
 				4CEFF2DF27B425D400FC0B28 /* NetworkImageFetch.swift */,
@@ -128,22 +177,6 @@
 				4CEFF2C327B420BE00FC0B28 /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		4CEFF2D227B423C100FC0B28 /* MainVC */ = {
-			isa = PBXGroup;
-			children = (
-				4CEFF2D327B423E500FC0B28 /* HeroesCollectionViewCell.swift */,
-			);
-			name = MainVC;
-			sourceTree = "<group>";
-		};
-		4CEFF2D527B4248E00FC0B28 /* DetailsVC */ = {
-			isa = PBXGroup;
-			children = (
-				4CEFF2E327B42AC200FC0B28 /* RandomHeroCollectionViewCell.swift */,
-			);
-			path = DetailsVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,7 +207,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					4CEFF2B127B420BC00FC0B28 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -216,14 +249,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CDFD7722B64438D00EED14C /* DetailsHeroViewController + CollectionView.swift in Sources */,
+				4CDFD7632B63DFF100EED14C /* Observable.swift in Sources */,
 				4CEFF2B627B420BC00FC0B28 /* AppDelegate.swift in Sources */,
+				4CDFD76E2B63F16B00EED14C /* DetailsViewModel.swift in Sources */,
 				4CEFF2DB27B4257400FC0B28 /* NetworkRequest.swift in Sources */,
+				4CDFD7702B643E7300EED14C /* NetworkConstants.swift in Sources */,
 				4CEFF2E227B4295100FC0B28 /* DetailsHeroViewController.swift in Sources */,
+				4CDFD7742B6446CF00EED14C /* Builder.swift in Sources */,
 				4CEFF2D427B423E500FC0B28 /* HeroesCollectionViewCell.swift in Sources */,
 				4CEFF2DD27B4259B00FC0B28 /* NetworkDataFetch.swift in Sources */,
+				4CDFD7612B63CE2700EED14C /* MainViewModel.swift in Sources */,
 				4CEFF2D727B4250300FC0B28 /* MainViewController.swift in Sources */,
+				4CDFD7672B63E93F00EED14C /* MainViewController + CollectionView.swift in Sources */,
+				4CDFD7652B63E05500EED14C /* MovieTableCellViewModel.swift in Sources */,
+				4CDFD7692B63EDAE00EED14C /* MainViewController + SearchController.swift in Sources */,
 				4CEFF2D127B4238F00FC0B28 /* HeroMarvelModel.swift in Sources */,
-				4CEFF2E427B42AC200FC0B28 /* RandomHeroCollectionViewCell.swift in Sources */,
 				4CEFF2E027B425D400FC0B28 /* NetworkImageFetch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +320,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -340,6 +382,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

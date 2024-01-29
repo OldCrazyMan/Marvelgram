@@ -7,24 +7,30 @@
 
 import UIKit
 
-class HeroesCollectionViewCell: UICollectionViewCell {
+final class HeroesCollectionViewCell: UICollectionViewCell {
     
-    let heroImageView: UIImageView = {
+    private let heroImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+    static var idCollectionView: String {
+        get {
+            "idCollectionView"
+        }
+    }
+    
+    override func prepareForReuse() {
+        heroImageView.image = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViews()
         setConstraints()
-    }
-    
-    override func prepareForReuse() {
-        heroImageView.image = nil
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +42,12 @@ class HeroesCollectionViewCell: UICollectionViewCell {
         addSubview(heroImageView)
     }
     
-    func cellConfigure(model: HeroMarvelModel) {
-        
-        guard let url = model.thumbnail.url else { return }
+    func cellConfigure(model: HeroCollectionCellViewModel) {
+        guard let url = model.image else { return }
+        self.setImage(with: url)
+    }
+    
+    private func setImage(with url: URL) {
         NetworkImageFetch.shared.requestImage(url: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -52,12 +61,9 @@ class HeroesCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
-            heroImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            heroImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            heroImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            heroImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+            heroImageView.widthAnchor.constraint(equalToConstant: frame.width),
+            heroImageView.heightAnchor.constraint(equalToConstant: frame.height),
         ])
     }
 }
